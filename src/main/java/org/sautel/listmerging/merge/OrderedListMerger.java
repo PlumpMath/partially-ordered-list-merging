@@ -34,10 +34,7 @@ public class OrderedListMerger<T extends Comparable<T>> {
 	public void merge(List<OrderedList<T>> inputLists, ListWriter<T> writer) {
 		Collection<OrderedList<T>> activeInputLists = filterActiveInputLists(inputLists);
 		while (!activeInputLists.isEmpty()) {
-			OrderedList<T> minInputList = orderedListComparator
-					.min(activeInputLists);
-			writer.write(minInputList.getCurrentElement());
-			minInputList.consumeCurrentElement();
+			consumeElementOnTheListWithMinElement(writer, activeInputLists);
 			activeInputLists = filterActiveInputLists(inputLists);
 		}
 	}
@@ -45,5 +42,13 @@ public class OrderedListMerger<T extends Comparable<T>> {
 	private Collection<OrderedList<T>> filterActiveInputLists(
 			List<OrderedList<T>> inputLists) {
 		return filter(inputLists, activeInputListPredicate);
+	}
+
+	private void consumeElementOnTheListWithMinElement(ListWriter<T> writer,
+			Collection<OrderedList<T>> activeInputLists) {
+		OrderedList<T> minInputList = orderedListComparator
+				.min(activeInputLists);
+		writer.write(minInputList.getCurrentElement());
+		minInputList.consumeCurrentElement();
 	}
 }

@@ -20,18 +20,18 @@ public class PartiallyOrderedList<T extends Comparable<T>> implements
 		}
 	}
 
+	private void addNextValueIfExists() {
+		if (iterator.hasNext()) {
+			bufferedValues.add(iterator.next());
+		}
+	}
+
 	@Override
 	public void consumeCurrentElement() {
 		T currentValue = getCurrentElement();
 		int currentValueIndex = bufferedValues.indexOf(currentValue);
 		bufferedValues.remove(currentValueIndex);
 		addNextValueIfExists();
-	}
-
-	private void addNextValueIfExists() {
-		if (iterator.hasNext()) {
-			bufferedValues.add(iterator.next());
-		}
 	}
 
 	@Override

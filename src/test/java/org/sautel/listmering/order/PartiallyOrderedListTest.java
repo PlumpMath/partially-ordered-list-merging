@@ -34,9 +34,9 @@ public class PartiallyOrderedListTest {
 
 	private void assertValuesAre(PartiallyOrderedList<Integer> list,
 			int... expectedValues) {
-		for (int i = 0; i < expectedValues.length; i++) {
+		for (int expectedValue : expectedValues) {
 			assertTrue(list.hasCurrentElement());
-			assertEquals(expectedValues[i], (int) list.getCurrentElement());
+			assertEquals(expectedValue, (int) list.getCurrentElement());
 			list.consumeCurrentElement();
 		}
 		assertFalse(list.hasCurrentElement());

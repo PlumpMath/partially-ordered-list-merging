@@ -44,9 +44,8 @@ public class InputStreamListReader implements Iterator<Integer> {
 			String line = reader.readLine();
 			if (line != null) {
 				return Optional.of(Integer.valueOf(line));
-			} else {
-				reader.close();
 			}
+			reader.close();
 			return Optional.absent();
 		} catch (IOException e) {
 			throw new RuntimeException(e);

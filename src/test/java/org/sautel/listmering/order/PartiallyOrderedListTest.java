@@ -1,14 +1,12 @@
 package org.sautel.listmering.order;
 
-import static com.google.common.collect.Lists.newArrayList;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
+import org.sautel.listmerging.order.PartiallyOrderedList;
 
 import java.util.List;
 
-import org.junit.Test;
-import org.sautel.listmerging.order.PartiallyOrderedList;
+import static com.google.common.collect.Lists.newArrayList;
+import static org.junit.Assert.*;
 
 public class PartiallyOrderedListTest {
 	@Test

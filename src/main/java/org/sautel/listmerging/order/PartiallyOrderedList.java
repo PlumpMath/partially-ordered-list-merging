@@ -5,6 +5,7 @@ import static java.util.Collections.min;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class PartiallyOrderedList<T extends Comparable<T>> implements
 		OrderedList<T> {

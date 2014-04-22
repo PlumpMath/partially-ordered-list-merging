@@ -1,21 +1,17 @@
 package org.sautel.listmering.file;
 
-import static com.google.common.base.Joiner.on;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import org.junit.Test;
+import org.sautel.listmerging.file.InputStreamListReader;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
-import org.junit.Test;
-import org.sautel.listmerging.file.InputStreamListReader;
+import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.joining;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 public class InputStreamListReaderTest {
 	@Test
@@ -61,14 +57,16 @@ public class InputStreamListReaderTest {
 
 	private InputStream buildInputStream(String... lines) {
 		try {
-			String file = on("\n").join(lines);
+            String file = asList(lines).stream().collect(joining("\n"));
 			return new ByteArrayInputStream(file.getBytes("UTF-8"));
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	@Test
+
+
+    @Test
 	public void ensureStreamIsClosed() throws IOException {
 		InputStream stream = spy(buildInputStream("123"));
 		InputStreamListReader iterator = new InputStreamListReader(stream);

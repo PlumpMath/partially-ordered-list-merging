@@ -1,17 +1,21 @@
 package org.sautel.listmerging.file;
 
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Iterator;
+import java.util.Optional;
 
-import com.google.common.base.Optional;
+import static java.util.Optional.empty;
+import static java.util.Optional.of;
+
 
 public class InputStreamListReader implements Iterator<Integer> {
 	private final BufferedReader reader;
-	private Optional<Integer> currentValue = Optional.absent();
-	private Optional<Integer> nextValue = Optional.absent();
+	private Optional<Integer> currentValue = empty();
+	private Optional<Integer> nextValue = empty();
 
 	public InputStreamListReader(InputStream stream) {
 		reader = new BufferedReader(new InputStreamReader(stream));
@@ -43,10 +47,10 @@ public class InputStreamListReader implements Iterator<Integer> {
 		try {
 			String line = reader.readLine();
 			if (line != null) {
-				return Optional.of(Integer.valueOf(line));
+				return of(Integer.valueOf(line));
 			}
 			reader.close();
-			return Optional.absent();
+			return empty();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
